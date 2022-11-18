@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p4="http://xamarin.com/mono/android/designer"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    
+    android:background="@drawable/customborder">
+
+
+   <TextView
+        android:background="@drawable/textviewborder"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Food name"
+            android:textSize="18dp"
+            android:id="@+id/foodNameTv"
+            android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    
+    <RelativeLayout
+        android:layout_marginLeft="25dp"
+        android:id="@+id/foodDataRl"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="#ffb07c"
+            android:textStyle="bold"
+            android:id="@+id/calorieTv"
+            android:layout_width="105dp"
+            android:layout_height="25dp"
+            android:text="Calories: "
+            android:textSize="16dp"/>
+
+        <TextView
+            android:textColor="#ffb07c"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/calorieTv"
+            android:id="@+id/calorieValueTv"
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:gravity="right"
+            android:text="0000"
+            android:textSize="16dp"/>
+        <TextView
+            android:textColor="#ffb07c"
+            android:textStyle="bold"
+            android:layout_marginLeft="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/calorieValueTv"
+            android:text="cal"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            android:layout_below="@id/calorieValueTv"
+            android:layout_width="105dp"
+            android:layout_height="25dp"
+            android:text="Protein: "
+            android:textSize="16dp"
+            android:id="@+id/proteinTv"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/calorieValueTv"
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/proteinTv"
+            android:text="0"
+                android:gravity="right"
+            android:textSize="16dp"
+            android:id="@+id/proteinValueTv"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="g"
+            android:layout_below="@id/calorieValueTv"
+            android:layout_toRightOf="@id/proteinValueTv"/>
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="25dp"
+            android:text="Carbohydrate: "
+            android:textSize="16dp"
+            android:id="@+id/carbTv"
+            android:layout_below="@id/proteinTv"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/carbTv"
+            android:layout_below="@id/proteinValueTv"
+            android:text="0"
+                android:gravity="right"
+            android:textSize="16dp"
+            android:id="@+id/carbValueTv"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="g"
+            android:layout_toRightOf="@id/carbValueTv"
+            android:layout_below="@id/proteinTv"/>
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="25dp"
+            android:text="Fat: "
+            android:textSize="16dp"
+            android:id="@+id/fatTv"
+            android:layout_below="@id/carbTv"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/fatTv"
+            android:layout_below="@id/carbValueTv"
+            android:text="0"
+                android:gravity="right"
+            android:textSize="16dp"
+            android:id="@+id/fatValueTv"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="g"
+            android:layout_toRightOf="@id/fatValueTv"
+            android:layout_below="@id/carbTv"/>
+
+       
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+     <TextView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/quantityTv"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:text="Quantity(g)"
+            android:textSize="16dp"/>
+        <EditText
+            android:id="@+id/quantityEt"
+            android:text="100"
+            android:gravity="center"
+            android:inputType="number"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quantityTv"/>
+        <Button
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#B7D2CE"
+            android:background="@drawable/customborder"
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:id="@+id/addBtn"
+            android:text="Add"
+            android:layout_below="@id/quantityEt"/>
+    </RelativeLayout>
+ </LinearLayout>
+
+</LinearLayout>

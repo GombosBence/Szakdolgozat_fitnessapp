@@ -1,0 +1,115 @@
+﻿using Android.App;
+using Android.Content;
+using Android.Hardware;
+using Android.Net.Wifi.Aware;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V4.App;
+using Android.Views;
+using Android.Widget;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Office2021.DocumentTasks;
+using Java.Interop;
+using Java.Lang;
+using Java.Util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Szakdolgozat.API;
+using Szakdolgozat.Model;
+using Xamarin.Forms;
+using Math = Java.Lang.Math;
+using Task = System.Threading.Tasks.Task;
+using Thread = System.Threading.Thread;
+
+[assembly: Xamarin.Forms.Dependency(typeof(StepCounterService))]
+namespace Szakdolgozat.Model
+{
+    [Service]
+    public class StepCounterService : Service, IStepCounter, ISensorEventListener
+    {
+
+        CancellationTokenSource _cts;
+        private int stepCount = 0;
+        public const int SERVICE_RUNNING_NOTIFICATION_ID = 10000;
+
+       
+        public override IBinder OnBind(Intent intent)
+        {
+            return null;
+        }
+
+        [return: GeneratedEnum]
+        public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
+        {
+
+            _cts = new CancellationTokenSource();
+            SensorManager sManager = Android.App.Application.Context.GetSystemService(Context.SensorService) as SensorManager;
+
+            Sensor accMeterSensor = sManager.GetDefaultSensor(SensorType.StepDetector);
+            sManager.RegisterListener(this, accMeterSensor, SensorDelay.Normal);
+
+            Notification notification = new NotificationHelper().GetServiceStartedNotification();
+            StartForeground(SERVICE_RUNNING_NOTIFICATION_ID, notification);
+
+            Task.Run( () =>
+            {
+                while (true)
+                {
+
+                    try
+                    {
+                        var message = new StepCountMessage
+                        {
+                            StepCount = stepCount
+                        };
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            MessagingCenter.Send<StepCounterService, int>(this, "StepCount", message.StepCount);
+                            stepCount = 0;
+                        });
+                        Thread.Sleep(2000);
+                    }
+                    catch (Android.OS.OperationCanceledException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            });
+
+            return StartCommandResult.Sticky;
+        }
+
+        public void StopSensorService()
+        {
+            Intent intent = new Intent(Android.App.Application.Context, typeof(StepCounterService));
+
+            Android.App.Application.Context.StopService(intent);
+        }
+        public void InitSensorService()
+        {
+            Intent intent = new Intent(Android.App.Application.Context, typeof(StepCounterService));
+
+            Android.App.Application.Context.StartForegroundService(intent);
+
+        }
+
+        public void OnAccuracyChanged(Sensor sensor, [GeneratedEnum] SensorStatus accuracy)
+        {
+            Console.WriteLine("OnAccuracyChangedCalled");
+        }
+
+        public void OnSensorChanged(SensorEvent e)
+        {
+            if (e.Sensor.Type == SensorType.StepDetector)
+            {
+               stepCount++;
+            }
+        }
+    }
+}

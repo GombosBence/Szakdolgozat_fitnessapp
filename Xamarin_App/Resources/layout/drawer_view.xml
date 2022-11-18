@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+  <group
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:checkableBehavior="single">
+
+    <item android:id="@+id/foodMenuItem1"  
+        android:title="Food"
+        android:checked="true"
+        android:icon="@drawable/food_icon"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25sp"/>
+        
+    <item android:id="@+id/dashboardMenuItem1"  
+        android:title="Dashboard"
+        android:icon="@drawable/Dashboard_Icon"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25sp"/> 
+        
+   
+    <item android:id="@+id/stepMenuItem2"  
+         android:title="Step Counter"
+         android:icon="@drawable/Step_Icon"
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:textSize="25sp"/>  
+  
+  
+    <item android:id="@+id/milestonesMenuItem3"  
+        android:title="Milestones"
+        android:icon="@drawable/milestone_icon"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25sp"/>
+
+    <item android:id="@+id/profileMenuItem1"  
+        android:title="Profile settings"
+        android:icon="@drawable/Settings_Icon"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25sp"/> 
+
+    <item android:id="@+id/logoutMenuItem3"  
+        android:title="Log Out"
+        android:icon="@drawable/exit_icon"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25sp"/>
+  </group>
+  
+</menu>
