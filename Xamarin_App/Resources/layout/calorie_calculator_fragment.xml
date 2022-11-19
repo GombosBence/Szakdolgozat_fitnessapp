@@ -2,127 +2,153 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:orientation="vertical">
+    
+        
+        
+ <ScrollView
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      android:id="@+id/scrollView1">
+    
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+    <TextView
+      android:text="@string/gender"
+      android:layout_width="100dp"
+      android:layout_height="@dimen/abc_action_bar_stacked_max_height"
+      android:id="@+id/genderTv"
+      android:textSize="18sp"
+      android:gravity="center"
+      android:minHeight="55dp"/>
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="25dp"
-    android:id="@+id/genderRl">
-
-        <TextView
-           android:text="@string/gender"
-            android:layout_width="100dp"
-            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-           android:id="@+id/genderTv"
-           android:textSize="18sp"
-            android:gravity="center"
-           android:minHeight="55dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
         <RadioButton
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:text="@string/male"
             android:textSize="16sp"
-            android:id="@+id/maleRadio"
-            android:layout_toRightOf="@id/genderTv"/>
+            android:id="@+id/maleRadio"/>
         <RadioButton
-            android:layout_toRightOf="@id/maleRadio"
-            android:layout_width="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:text="@string/female"
             android:textSize="16sp"
             android:id="@+id/femaleRadio"/>
-        <TextView
-            android:layout_marginTop="25dp"
-            android:id="@+id/ageTv"
-            android:layout_below="@id/genderTv"
-            android:text="@string/age"
-            android:layout_width="100dp"
-            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:minHeight="55dp"/>
+
+
+    </LinearLayout>
+
+     <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextColor="#B7D2CE"
+        android:textColorHint="#B7D2CE"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="3dp">
+        
         <EditText
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@id/ageTv"
-            android:layout_below="@id/maleRadio"
-            android:layout_width="250dp"
+            android:textColorHint="#B7D2CE"
+            android:background="@drawable/edittextborder"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Age"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:inputType="number"
-            android:minHeight="55dp"
             android:textSize="20sp"
             android:gravity="center"
             android:id="@+id/ageEt"/>
-        <TextView
-            android:layout_marginTop="25dp"
-            android:id="@+id/weightTv"
-            android:layout_below="@id/ageTv"
-            android:text="@string/weight"
-            android:layout_width="100dp"
-            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:minHeight="55dp"/>
+    </android.support.design.widget.TextInputLayout>
+       
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextColor="#B7D2CE"
+        android:textColorHint="#B7D2CE"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="3dp">
+
         <EditText
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@id/weightTv"
-            android:layout_below="@id/ageEt"
-            android:layout_width="250dp"
-            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:inputType="number"
-            android:minHeight="55dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:id="@+id/weightEt"/>
-        <TextView
-            android:layout_marginTop="25dp"
-            android:id="@+id/heightTv"
-            android:layout_below="@id/weightTv"
-            android:text="@string/height"
-            android:layout_width="100dp"
-            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:minHeight="55dp"/>
+                android:textColorHint="#B7D2CE"
+                android:background="@drawable/edittextborder"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Weight (kg)"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/ageEt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/abc_action_bar_stacked_max_height"
+                android:inputType="number"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:id="@+id/weightEt"/>
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextColor="#B7D2CE"
+        android:textColorHint="#B7D2CE"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="3dp">
+
         <EditText
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@id/heightTv"
+        
+            android:background="@drawable/edittextborder"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Height (cm)"
+            android:textColorHint="#B7D2CE"
+            android:layout_marginTop="15dp"
             android:layout_below="@id/weightEt"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:inputType="number"
-            android:minHeight="55dp"
             android:textSize="20sp"
             android:gravity="center"
             android:id="@+id/heightEt"/>
+
+    </android.support.design.widget.TextInputLayout>
+
         <TextView
-            android:layout_marginTop="25dp"
             android:id="@+id/activityTv"
-            android:layout_below="@id/heightTv"
             android:text="@string/ActivityLevel"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:textSize="18sp"
             android:gravity="center"
             android:minHeight="55dp"/>
         <Spinner
-           android:layout_marginTop="25dp"
-            android:layout_below="@id/heightEt"
-            android:layout_toRightOf="@id/activityTv"
+        android:textAlignment="center"
+            android:background="@drawable/customborder"
             android:id="@+id/acitivtySpinner"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:minHeight="55dp"
             android:textSize="20sp"
             android:gravity="center"/>
         <TextView
-            android:layout_marginTop="25dp"
-            android:layout_below="@id/activityTv"
             android:id="@+id/goalTv"
             android:text="@string/goal"
             android:layout_width="100dp"
@@ -130,24 +156,32 @@
             android:textSize="18sp"
             android:gravity="center"/>
         <Spinner
-            android:layout_marginTop="25dp"
-            android:layout_below="@id/acitivtySpinner"
-            android:layout_toRightOf="@id/goalTv"
+        android:textAlignment="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/customborder"
             android:id="@+id/goalSpinner"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
             android:textSize="20sp"
             android:gravity="center"/>
                  
-    </RelativeLayout>
+  
     <Button
+        android:layout_marginTop="15dp"
         android:id="@+id/saveBtn"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/save"
         android:textSize="20dp"
-        android:layout_marginTop="25dp"
-        android:background="#B7D2CE"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/customborder"
+        android:backgroundTint="#B7D2CE"
         android:textColor="#FFFFFF"/>
+
+     </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

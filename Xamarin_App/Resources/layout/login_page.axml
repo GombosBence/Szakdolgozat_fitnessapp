@@ -12,10 +12,12 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#B7D2CE"
         app:hintTextColor="#B7D2CE"
       app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginBottom="3dp"
-        android:id="@+id/usernameIl">
+        android:id="@+id/usernameIl"
+        >
 
         <EditText
             
@@ -40,6 +42,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#B7D2CE"
         app:hintTextColor="#B7D2CE"
         app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginBottom="3dp"
@@ -76,7 +79,8 @@
         android:textSize="20sp"
         android:gravity="center"
         android:id="@+id/loginBtn"
-        android:background="#B7D2CE"/>
+         android:backgroundTint="#B7D2CE"
+                android:background="@drawable/customborder"/>
     <Button
         android:layout_marginTop="100dp"
         android:layout_below="@+id/loginBtn"
