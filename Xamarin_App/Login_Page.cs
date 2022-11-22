@@ -49,7 +49,7 @@ namespace Szakdolgozat
             string ip = "http://" + getLocalIp() + ":45455/";
             api = RestService.For<Interface1>(connectionString.getConnection());
 
-            /*
+            
             if (Preferences.Get("LoggedIn", false))
             {
                 usernameEt.Text = Preferences.Get("UserName", "");
@@ -57,7 +57,7 @@ namespace Szakdolgozat
                 LoginBtn_Click(null, null);
 
 
-            }*/
+            }
 
 
             if (_registrationBtn != null)

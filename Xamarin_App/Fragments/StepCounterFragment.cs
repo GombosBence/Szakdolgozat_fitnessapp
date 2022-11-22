@@ -44,11 +44,12 @@ namespace Szakdolgozat.Fragments
             stepsTv = view.FindViewById<TextView>(Resource.Id.stepsTv);
             stepGoalSpinner = view.FindViewById<Spinner>(Resource.Id.stepGoalSpinner);
             stepProgressBar = view.FindViewById<ProgressBar>(Resource.Id.stepProgressBar);
+            
 
 
             MessagingCenter.Subscribe<StepCounterService, int>(this, "StepCount",  (sender, arg) => 
             {
-                StepsCounter += arg;
+                StepsCounter = arg;
                 stepProgressBar.Progress = StepsCounter;
                 stepsTv.Text = StepsCounter.ToString();
             });

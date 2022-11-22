@@ -55,7 +55,7 @@ namespace Szakdolgozat
             }
             else
             {
-                DependencyService.Resolve<IStepCounter>().InitSensorService();
+                DependencyService.Resolve<IStepCounter>().InitSensorService(loggedInUserId);
             }
 
             fragmentContainer = FindViewById<FrameLayout>(Resource.Id.fragmentContainer);
@@ -100,7 +100,7 @@ namespace Szakdolgozat
             var ispermissionGranted = grantResults[0] == Permission.Granted;
             if (ispermissionGranted)
             {
-                DependencyService.Resolve<IStepCounter>().InitSensorService();
+                DependencyService.Resolve<IStepCounter>().InitSensorService(loggedInUserId);
             }
         }
 
@@ -176,7 +176,8 @@ namespace Szakdolgozat
                         break;
                     case "Log Out":
                         DependencyService.Resolve<IStepCounter>().StopSensorService();
-                        Preferences.Clear();
+                        Preferences.Remove("UserName");
+                        Preferences.Remove("Password");
                         LogOut();
                         break;
                 }

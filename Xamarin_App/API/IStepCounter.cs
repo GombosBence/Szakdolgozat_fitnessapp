@@ -15,7 +15,7 @@ namespace Szakdolgozat.API
     {
         //int Steps { get; set; }
        // bool IsAvaiable();
-        void InitSensorService();
+        void InitSensorService(int userId);
         void StopSensorService();
 
     }

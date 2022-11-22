@@ -17,6 +17,8 @@ public partial class AspWebApiDbContext : DbContext
 
     public virtual DbSet<MealsHistory> MealsHistories { get; set; }
 
+    public virtual DbSet<StepsHistory> StepsHistories { get; set; }
+
     public virtual DbSet<UserInformation> UserInformations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,6 +48,24 @@ public partial class AspWebApiDbContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Meals_His__Quant__628FA481");
+        });
+
+        modelBuilder.Entity<StepsHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Steps_Hi__3213E83FA408B5E2");
+
+            entity.ToTable("Steps_History");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CaloriesBurnt).HasColumnName("Calories_Burnt");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.TimeSpent).HasColumnName("Time_Spent");
+            entity.Property(e => e.UserId).HasColumnName("userId");
+
+            entity.HasOne(d => d.User).WithMany(p => p.StepsHistories)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Steps_His__Time___656C112C");
         });
 
         modelBuilder.Entity<UserInformation>(entity =>

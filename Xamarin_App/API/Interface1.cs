@@ -43,5 +43,11 @@ namespace Szakdolgozat.API
 
         [Post("/api/Meals")]
         Task<string> AddMeal([Body] int userId, string foodName, int calories, int protein, int carb, int fat, double quantity);
+
+        [Post("/api/Steps")]
+        Task<int> saveSteps(int userId, int steps, DateTime date);
+
+        [Post("/api/GetSteps")]
+        Task<int> getSteps(int userId, DateTime date);
     }
 }
