@@ -59,7 +59,10 @@ namespace Szakdolgozat.Model
         [return: GeneratedEnum]
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
-            id = intent.GetIntExtra("userId", 0);
+            if (intent.HasExtra("userId"))
+            {
+                id = intent.GetIntExtra("userId", 0);
+            }
             api = RestService.For<Interface1>(connectionString.getConnection());
             _cts = new CancellationTokenSource();
             SensorManager sManager = Android.App.Application.Context.GetSystemService(Context.SensorService) as SensorManager;

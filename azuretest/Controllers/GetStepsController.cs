@@ -17,9 +17,10 @@ namespace azuretest.Controllers
         {
             List<StepsHistory> stepsList = dbContext.StepsHistories.ToList();
             UserInformation user = dbContext.UserInformations.Where(x => x.UserId == userId).First();
-            var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
-            if (userStepHistory.GetType() == typeof(StepsHistory) && userStepHistory.Steps != null)
+            
+            if (stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).Any())
             {
+                var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
                 return (int)userStepHistory.Steps;
             }
             return 0;

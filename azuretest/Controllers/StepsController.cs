@@ -31,9 +31,10 @@ namespace azuretest.Controllers
             }
             if (dbContext.StepsHistories.Count() != 0)
             {
-                var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
-                if (userStepHistory.GetType() == typeof(StepsHistory))
+                
+                if (stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).Any())
                 {
+                    var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
                     userStepHistory.Steps = steps;
                     dbContext.Update(userStepHistory);
                     dbContext.SaveChanges();
