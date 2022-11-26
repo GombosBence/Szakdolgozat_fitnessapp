@@ -21,6 +21,10 @@ using Szakdolgozat.API;
 using Java.Lang;
 using Xamarin.Forms;
 using Math = Java.Lang.Math;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microcharts.Droid;
+using Microcharts;
+using SkiaSharp;
 
 namespace Szakdolgozat.Fragments
 {
@@ -37,6 +41,7 @@ namespace Szakdolgozat.Fragments
         ProgressBar stepProgressBar;
         TextView distanceTv;
         TextView caloriestBurntTv;
+        ChartView chartView;
 
        
 
@@ -48,7 +53,10 @@ namespace Szakdolgozat.Fragments
             stepProgressBar = view.FindViewById<ProgressBar>(Resource.Id.stepProgressBar);
             distanceTv = view.FindViewById<TextView>(Resource.Id.distanceTv);
             caloriestBurntTv = view.FindViewById<TextView>(Resource.Id.caloriesBurntTv);
-            
+            chartView = view.FindViewById<ChartView>(Resource.Id.chartView1);
+            drawChart();
+
+
 
 
             MessagingCenter.Subscribe<StepCounterService, int>(this, "StepCount",  (sender, arg) => 
@@ -73,6 +81,56 @@ namespace Szakdolgozat.Fragments
 
 
             return view;
+        }
+
+        private void drawChart()
+        {
+            List<ChartEntry> DataList = new List<ChartEntry>();
+            DataList.Add(new ChartEntry(1000)
+            {
+               Label = "Day1",
+               ValueLabel = "1000",
+               Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(10000)
+            {
+                Label = "Day2",
+                ValueLabel = "10000",
+                Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(2000)
+            {
+                Label = "Day3",
+                ValueLabel = "2000",
+                Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(3000)
+            {
+                Label = "Day4",
+                ValueLabel = "3000",
+                Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(4000)
+            {
+                Label = "Day5",
+                ValueLabel = "4000",
+                Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(5000)
+            {
+                Label = "Day6",
+                ValueLabel = "5000",
+                Color = SKColor.Parse("#266489")
+            });
+            DataList.Add(new ChartEntry(10000)
+            {
+                Label = "Day7",
+                ValueLabel = "10000",
+                Color = SKColor.Parse("#266489")
+            });
+
+            var chart = new BarChart() { Entries = DataList, LabelTextSize = 30f, MaxValue = 20000 };
+            chartView.Chart = chart;
         }
 
 
