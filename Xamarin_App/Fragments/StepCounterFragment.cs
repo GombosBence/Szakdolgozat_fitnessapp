@@ -35,6 +35,8 @@ namespace Szakdolgozat.Fragments
         TextView stepsTv;
         Spinner stepGoalSpinner;
         ProgressBar stepProgressBar;
+        TextView distanceTv;
+        TextView caloriestBurntTv;
 
        
 
@@ -44,6 +46,8 @@ namespace Szakdolgozat.Fragments
             stepsTv = view.FindViewById<TextView>(Resource.Id.stepsTv);
             stepGoalSpinner = view.FindViewById<Spinner>(Resource.Id.stepGoalSpinner);
             stepProgressBar = view.FindViewById<ProgressBar>(Resource.Id.stepProgressBar);
+            distanceTv = view.FindViewById<TextView>(Resource.Id.distanceTv);
+            caloriestBurntTv = view.FindViewById<TextView>(Resource.Id.caloriesBurntTv);
             
 
 
@@ -52,6 +56,9 @@ namespace Szakdolgozat.Fragments
                 StepsCounter = arg;
                 stepProgressBar.Progress = StepsCounter;
                 stepsTv.Text = StepsCounter.ToString();
+                caloriestBurntTv.Text = (StepsCounter * 0.04).ToString() + " Kcal";
+                distanceTv.Text = (StepsCounter / 1200.0).ToString("0.00") + " Km";
+                
             });
 
             

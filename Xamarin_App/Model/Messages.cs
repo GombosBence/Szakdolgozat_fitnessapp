@@ -16,6 +16,9 @@ namespace Szakdolgozat.Model
     public class StepCountMessage
     {
         public int StepCount { get; set; }
+
+        public double CaloriesBurnt {get; set; }
+        public double Distance { get; set; }
     }
 
 }

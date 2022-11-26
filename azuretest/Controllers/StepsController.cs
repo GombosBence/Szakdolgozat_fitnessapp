@@ -36,6 +36,8 @@ namespace azuretest.Controllers
                 {
                     var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
                     userStepHistory.Steps = steps;
+                    userStepHistory.CaloriesBurnt = steps * 0.04;
+                    userStepHistory.Distance = steps / 1200.0;
                     dbContext.Update(userStepHistory);
                     dbContext.SaveChanges();
                     return (int)userStepHistory.Steps;
@@ -51,7 +53,7 @@ namespace azuretest.Controllers
                };
              dbContext.StepsHistories.Add(newStepRecord);
              dbContext.SaveChanges();
-             return (int)newStepRecord.Steps;
+            return -2;
             
 
             

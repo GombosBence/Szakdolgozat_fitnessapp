@@ -72,12 +72,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center"/>
-        <ImageView
-            android:src="@drawable/time_icon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
 
     </LinearLayout>
     
@@ -102,14 +96,6 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="Distance"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="Time spent"/>
 
     </LinearLayout>
 
@@ -129,15 +115,6 @@
             android:text="0"/>
         <TextView
             android:id="@+id/distanceTv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="0"/>
-        <TextView
-            android:id="@+id/timeSpentTv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

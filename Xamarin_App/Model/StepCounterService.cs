@@ -51,10 +51,12 @@ namespace Szakdolgozat.Model
             return null;
         }
 
-        public async void GetStepsAsync()
+        public async Task<int> GetStepsAsync()
         {
-            stepCount =  await api.getSteps(1, DateTime.Now);
+            return await api.getSteps(1, DateTime.Now);
         }
+
+        
 
         [return: GeneratedEnum]
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
@@ -65,14 +67,20 @@ namespace Szakdolgozat.Model
             }
             api = RestService.For<Interface1>(connectionString.getConnection());
             _cts = new CancellationTokenSource();
+           
+
             SensorManager sManager = Android.App.Application.Context.GetSystemService(Context.SensorService) as SensorManager;
-            GetStepsAsync();
-            
+            stepCount = Preferences.Get("Steps", 0);
+
+
 
             Sensor stepDetectorSensor = sManager.GetDefaultSensor(SensorType.StepDetector);
             sManager.RegisterListener(this, stepDetectorSensor, SensorDelay.Normal);
 
             Notification notification = new NotificationHelper().GetServiceStartedNotification();
+
+
+
             StartForeground(SERVICE_RUNNING_NOTIFICATION_ID, notification);
 
             Task.Run(async () =>
@@ -82,12 +90,20 @@ namespace Szakdolgozat.Model
 
                     try
                     {
-                        
-                        int i = await api.saveSteps(1, stepCount, DateTime.Now); 
+
+                        int i = await api.saveSteps(1, stepCount, DateTime.Now);
+
+                        if (i == -2)
+                        {
+                            Preferences.Remove("Steps");
+                            stepCount = 0;
+                        }
 
                         var message = new StepCountMessage
                         {
                             StepCount = stepCount
+                            
+                            
                         };
                         Device.BeginInvokeOnMainThread(() =>
                         {
@@ -111,6 +127,7 @@ namespace Szakdolgozat.Model
             Intent intent = new Intent(Android.App.Application.Context, typeof(StepCounterService));
 
             Android.App.Application.Context.StopService(intent);
+
         }
         public void InitSensorService(int userId)
         {
@@ -132,6 +149,7 @@ namespace Szakdolgozat.Model
             if (e.Sensor.Type == SensorType.StepDetector)
             {
                 stepCount++;
+                Preferences.Set("Steps", stepCount);
                
             }
         }
