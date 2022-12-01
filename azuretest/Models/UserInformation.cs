@@ -27,6 +27,8 @@ public partial class UserInformation
 
     public int? ActivityLevel { get; set; }
 
+    public int? StepGoal { get; set; }
+
     public virtual ICollection<MealsHistory> MealsHistories { get; } = new List<MealsHistory>();
 
     public virtual ICollection<StepsHistory> StepsHistories { get; } = new List<StepsHistory>();

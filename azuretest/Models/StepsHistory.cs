@@ -17,7 +17,5 @@ public partial class StepsHistory
 
     public double? Distance { get; set; }
 
-    public TimeSpan? TimeSpent { get; set; }
-
     public virtual UserInformation User { get; set; } = null!;
 }

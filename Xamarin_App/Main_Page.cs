@@ -178,6 +178,8 @@ namespace Szakdolgozat
                         DependencyService.Resolve<IStepCounter>().StopSensorService();
                         Preferences.Remove("UserName");
                         Preferences.Remove("Password");
+                        Preferences.Remove("LoggedInID");
+                        Preferences.Set("LoggedIn", false);
                         LogOut();
                         break;
                 }

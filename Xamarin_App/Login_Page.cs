@@ -54,7 +54,11 @@ namespace Szakdolgozat
             {
                 usernameEt.Text = Preferences.Get("UserName", "");
                 passwordEt.Text = Preferences.Get("Password", "");
-                LoginBtn_Click(null, null);
+
+                Intent i = new Intent(this, typeof(Main_Page));
+                i.PutExtra("userID", Preferences.Get("LoggedInId", -1));
+                StartActivity(i);
+                Finish();
 
 
             }

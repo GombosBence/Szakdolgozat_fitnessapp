@@ -51,11 +51,6 @@ namespace Szakdolgozat.Model
             return null;
         }
 
-        public async Task<int> GetStepsAsync()
-        {
-            return await api.getSteps(1, DateTime.Now);
-        }
-
         
 
         [return: GeneratedEnum]
@@ -91,12 +86,13 @@ namespace Szakdolgozat.Model
                     try
                     {
 
-                        int i = await api.saveSteps(1, stepCount, DateTime.Now);
+                        int i = await api.saveSteps(Preferences.Get("LoggedInId", -1), stepCount, DateTime.Now);
 
                         if (i == -2)
                         {
                             Preferences.Remove("Steps");
                             stepCount = 0;
+                            
                         }
 
                         var message = new StepCountMessage
@@ -110,6 +106,8 @@ namespace Szakdolgozat.Model
                             MessagingCenter.Send<StepCounterService, int>(this, "StepCount", message.StepCount);
                             
                         });
+
+                        await Task.Delay(4000);
                         
                     }
                     catch (Android.OS.OperationCanceledException e)

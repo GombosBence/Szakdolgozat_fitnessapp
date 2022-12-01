@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/registerBtn"
         android:gravity="center"
-        android:textColor="#0000ff"
+        android:textColor="#B7D2CE"
         android:background="@android:color/transparent"/>
     <Button
         android:layout_marginTop="10dp"
@@ -104,6 +104,6 @@
         android:id="@+id/forgotPwBtn"
         android:gravity="center"
         android:onClick=""
-        android:textColor="#0000ff"
+        android:textColor="#B7D2CE"
         android:background="@android:color/transparent"/>
 </LinearLayout>

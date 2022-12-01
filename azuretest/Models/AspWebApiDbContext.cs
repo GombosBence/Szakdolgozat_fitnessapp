@@ -59,7 +59,6 @@ public partial class AspWebApiDbContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CaloriesBurnt).HasColumnName("Calories_Burnt");
             entity.Property(e => e.Date).HasColumnType("datetime");
-            entity.Property(e => e.TimeSpent).HasColumnName("Time_Spent");
             entity.Property(e => e.UserId).HasColumnName("userId");
 
             entity.HasOne(d => d.User).WithMany(p => p.StepsHistories)
@@ -89,6 +88,7 @@ public partial class AspWebApiDbContext : DbContext
             entity.Property(e => e.Salt)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.StepGoal).HasColumnName("Step_Goal");
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);

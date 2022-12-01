@@ -47,7 +47,15 @@ namespace Szakdolgozat.API
         [Post("/api/Steps")]
         Task<int> saveSteps(int userId, int steps, DateTime date);
 
+        [Post("/api/SetGoal")]
+        Task<string> setGoal(int userId, int goal, DateTime date);
+
         [Post("/api/GetSteps")]
-        Task<int> getSteps(int userId, DateTime date);
+        Task<int[]> getLastWeekSteps(int userid, List<DateTime> dates);
+
+        [Post("/api/GetStepGoal")]
+        Task<int> getStepGoal(int userid);
+
+        
     }
 }

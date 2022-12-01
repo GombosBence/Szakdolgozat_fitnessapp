@@ -25,6 +25,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microcharts.Droid;
 using Microcharts;
 using SkiaSharp;
+using Refit;
 
 namespace Szakdolgozat.Fragments
 {
@@ -42,6 +43,11 @@ namespace Szakdolgozat.Fragments
         TextView distanceTv;
         TextView caloriestBurntTv;
         ChartView chartView;
+        Interface1 api;
+        int loggedInUserId;
+        List<DateTime> lastSevenDays = new List<DateTime>();
+        int[] lastSevenDaysSteps = new int[6];
+        ConnectionString connectionString = new ConnectionString();
 
        
 
@@ -54,7 +60,10 @@ namespace Szakdolgozat.Fragments
             distanceTv = view.FindViewById<TextView>(Resource.Id.distanceTv);
             caloriestBurntTv = view.FindViewById<TextView>(Resource.Id.caloriesBurntTv);
             chartView = view.FindViewById<ChartView>(Resource.Id.chartView1);
-            drawChart();
+            api = RestService.For<Interface1>(connectionString.getConnection());
+            loggedInUserId = Arguments.GetInt("uid");
+            getLastSevenDaysSteps();
+           
 
 
 
@@ -83,62 +92,75 @@ namespace Szakdolgozat.Fragments
             return view;
         }
 
+        public async void getStepGoal()
+        {
+            var result = api.getStepGoal(loggedInUserId);
+            switch (result.Result)
+            {
+                case 1000:
+                    stepGoalSpinner.SetSelection(0);
+                    break;
+                case 2000:
+                    stepGoalSpinner.SetSelection(1);
+                    break;
+                case 5000:
+                    stepGoalSpinner.SetSelection(2);
+                    break;
+                case 10000:
+                    stepGoalSpinner.SetSelection(3);
+                    break;
+                case 15000:
+                    stepGoalSpinner.SetSelection(4);
+                    break;
+                case 20000:
+                    stepGoalSpinner.SetSelection(5);
+                    break;
+            }
+            
+
+        }
+
+        public async void getLastSevenDaysSteps()
+        {
+        
+            for (int i = 1; i <= 7; i++)
+            {
+                lastSevenDays.Add(DateTime.Now.AddDays(-1 * i));
+            }
+
+            lastSevenDaysSteps = await api.getLastWeekSteps(loggedInUserId, lastSevenDays);
+            drawChart();
+
+        }
+
         private void drawChart()
         {
+            
             List<ChartEntry> DataList = new List<ChartEntry>();
-            DataList.Add(new ChartEntry(1000)
+            for (int i = lastSevenDaysSteps.Length -1; i >= 0; i--)
             {
-               Label = "Day1",
-               ValueLabel = "1000",
-               Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(10000)
-            {
-                Label = "Day2",
-                ValueLabel = "10000",
-                Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(2000)
-            {
-                Label = "Day3",
-                ValueLabel = "2000",
-                Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(3000)
-            {
-                Label = "Day4",
-                ValueLabel = "3000",
-                Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(4000)
-            {
-                Label = "Day5",
-                ValueLabel = "4000",
-                Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(5000)
-            {
-                Label = "Day6",
-                ValueLabel = "5000",
-                Color = SKColor.Parse("#266489")
-            });
-            DataList.Add(new ChartEntry(10000)
-            {
-                Label = "Day7",
-                ValueLabel = "10000",
-                Color = SKColor.Parse("#266489")
-            });
+                DataList.Add(new ChartEntry(lastSevenDaysSteps[i])
+                {
+                    Label = lastSevenDays.ElementAt(i).ToString("MM-dd"),
+                    ValueLabel = lastSevenDaysSteps[i].ToString(),
+                    Color = SKColor.Parse("#B7D2CE")
+                });
+            }
 
-            var chart = new BarChart() { Entries = DataList, LabelTextSize = 30f, MaxValue = 20000 };
+            var chart = new BarChart() { Entries = DataList, LabelTextSize = 30f};
             chartView.Chart = chart;
         }
 
 
-        private void spinner_Itemselceted(object sender, AdapterView.ItemSelectedEventArgs e)
+        private async void spinner_Itemselceted(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var spinner = sender as Spinner;
+            getStepGoal();
             stepProgressBar.Max = Int32.Parse(spinner.SelectedItem.ToString());
+            
 
+
+            var result = await api.setGoal(loggedInUserId, Int32.Parse(spinner.SelectedItem.ToString()), DateTime.Now);
         }
      
     }

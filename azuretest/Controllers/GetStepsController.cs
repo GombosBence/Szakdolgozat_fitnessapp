@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace azuretest.Controllers
 {
@@ -13,17 +14,31 @@ namespace azuretest.Controllers
         AspWebApiDbContext dbContext = new AspWebApiDbContext();
 
         [HttpPost]
-        public int getSteps(int userId, DateTime date)
+        public int[] getLastWeekSteps(int userid, List<DateTime> dates)
         {
-            List<StepsHistory> stepsList = dbContext.StepsHistories.ToList();
-            UserInformation user = dbContext.UserInformations.Where(x => x.UserId == userId).First();
-            
-            if (stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).Any())
+            int[] stepValues = new int[7];
+            List<StepsHistory> stepHistoryList = dbContext.StepsHistories.ToList();
+
+            if (dbContext.StepsHistories.Where(x => x.UserId == userid).Any())
             {
-                var userStepHistory = stepsList.Where(x => x.UserId == userId && x.Date.ToString("yyyy-MM-dd") == date.ToString("yyyy-MM-dd")).First();
-                return (int)userStepHistory.Steps;
+                
+                for (int i = 0; i < 7; i++)
+                {
+                    if (stepHistoryList.Where(x => x.UserId == userid && x.Date.ToString("yyyy-MM-dd") == dates.ElementAt(i).ToString("yyyy-MM-dd")).Any())
+                    {
+                        StepsHistory userHistory = stepHistoryList.Where(x => x.UserId == userid && x.Date.ToString("yyyy-MM-dd") == dates.ElementAt(i).ToString("yyyy-MM-dd")).First();
+                        stepValues[i] = (int)userHistory.Steps;
+                    }
+                    else 
+                    {
+                        stepValues[i] = 0;
+                    }
+                }
             }
-            return 0;
+            
+            return stepValues;
         }
+
+
     }
 }
