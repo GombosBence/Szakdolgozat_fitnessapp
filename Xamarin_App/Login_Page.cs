@@ -15,6 +15,8 @@ using System.Net;
 using Java.Util.Prefs;
 using Xamarin.Essentials;
 using Preferences = Xamarin.Essentials.Preferences;
+using Xamarin.Forms;
+using Button = Android.Widget.Button;
 
 namespace Szakdolgozat
 {
@@ -35,6 +37,7 @@ namespace Szakdolgozat
 #pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
         {
             base.OnCreate(savedInstanceState);
+            Forms.Init( this ,savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.login_page);
 
@@ -45,8 +48,6 @@ namespace Szakdolgozat
             passwordEt = FindViewById<EditText>(Resource.Id.passwordEt);
             forgotPwBtn = FindViewById<Button>(Resource.Id.forgotPwBtn);
             loginBtn = FindViewById<Button>(Resource.Id.loginBtn);
-            //api = RestService.For<Interface1>("http://10.0.2.2:5016/");
-            string ip = "http://" + getLocalIp() + ":45455/";
             api = RestService.For<Interface1>(connectionString.getConnection());
 
             
@@ -55,10 +56,7 @@ namespace Szakdolgozat
                 usernameEt.Text = Preferences.Get("UserName", "");
                 passwordEt.Text = Preferences.Get("Password", "");
 
-                Intent i = new Intent(this, typeof(Main_Page));
-                i.PutExtra("userID", Preferences.Get("LoggedInId", -1));
-                StartActivity(i);
-                Finish();
+                LoginBtn_Click(null, null);
 
 
             }
@@ -77,6 +75,11 @@ namespace Szakdolgozat
 
         private async void LoginBtn_Click(object sender, EventArgs e)
         {
+            ProgressDialog mDialog = new ProgressDialog(this);
+            mDialog.SetMessage("Loading....");
+            mDialog.SetCancelable(false);
+            mDialog.Show();
+
             UserInformation userinfo = new UserInformation
             {
                 Username = usernameEt.Text,
@@ -99,7 +102,7 @@ namespace Szakdolgozat
                 Preferences.Set("LoggedInId", loggedInUserID);
                 Preferences.Set("UserName", userinfo.Username);
                 Preferences.Set("Password", userinfo.Password);
-
+                mDialog.Hide();
                 Intent i = new Intent(this, typeof(Main_Page));
                 i.PutExtra("userID", loggedInUserID);
                 StartActivity(i);
