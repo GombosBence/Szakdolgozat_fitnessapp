@@ -41,6 +41,8 @@ namespace Szakdolgozat.Model
         int id;
         Interface1 api;
         CancellationTokenSource _cts;
+
+        private DateTime _currentDate = DateTime.Now.Date;
         private int stepCount = 0;
         public const int SERVICE_RUNNING_NOTIFICATION_ID = 10000;
 
@@ -88,12 +90,7 @@ namespace Szakdolgozat.Model
 
                         int i = await api.saveSteps(Preferences.Get("LoggedInId", -1), stepCount, DateTime.Now);
 
-                        if (i == -2)
-                        {
-                            Preferences.Remove("Steps");
-                            stepCount = 0;
-                            
-                        }
+                     
 
                         var message = new StepCountMessage
                         {
@@ -144,6 +141,15 @@ namespace Szakdolgozat.Model
 
         public async void OnSensorChanged(SensorEvent e)
         {
+
+            if (_currentDate != DateTime.Now.Date)
+            {
+                stepCount = 0;
+                _currentDate = DateTime.Now.Date;
+                Preferences.Remove("Steps");
+            }
+
+
             if (e.Sensor.Type == SensorType.StepDetector)
             {
                 stepCount++;

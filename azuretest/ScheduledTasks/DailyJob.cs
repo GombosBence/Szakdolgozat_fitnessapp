@@ -5,8 +5,6 @@ using Quartz;
 namespace azuretest.ScheduledTasks
 {
 
-    
-
     public class DailyJob : IJob
     {
         AspWebApiDbContext dbContext = new AspWebApiDbContext();
@@ -15,9 +13,54 @@ namespace azuretest.ScheduledTasks
 
             List<UserInformation> users = dbContext.UserInformations.ToList();
             List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
+            List<StepsHistory> userSteps = dbContext.StepsHistories.ToList();
 
             foreach (UserInformation user in users)
             {
+
+
+                //Check step milestones
+
+                foreach (StepsHistory steps in userSteps)
+                {
+                    if (steps.Steps > 5000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 1) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 1;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                    if (steps.Steps > 10000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 2) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 2;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                    if (steps.Steps > 20000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 3) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 3;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                }
+
+
+                //Check 1 day streak
+
                 if (CheckCalorieGoalStreak(user.UserId, 1))
                 {
                     if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 4) == null)

@@ -17,6 +17,7 @@ namespace azuretest.Controllers
         [HttpPost]
         public string calculateMaxCalories([FromBody] int postedUserId)
         {
+            List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
             List<UserInformation> datalist = dbContext.UserInformations.ToList();
             UserInformation? user = datalist.Find(x => x.UserId == postedUserId);
 
@@ -66,6 +67,14 @@ namespace azuretest.Controllers
 
                 int harrisBenedict = (int)Math.Round(brm);
                 user.CalorieGoal = harrisBenedict;
+                if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 9) == null)
+                {
+                    UserMilestone newMilestone = new UserMilestone();
+                    newMilestone.UserId = user.UserId;
+                    newMilestone.MilestoneId = 9;
+                    dbContext.UserMilestones.Add(newMilestone);
+                    dbContext.SaveChanges();
+                }
                 dbContext.Update(user);
                 dbContext.SaveChanges();
                 return JsonConvert.SerializeObject(harrisBenedict, Formatting.Indented);

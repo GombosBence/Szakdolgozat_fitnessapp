@@ -40,6 +40,7 @@ namespace azuretest.Controllers
 
             UserInformation user = new UserInformation();
             List<UserInformation> userList = dbContext.UserInformations.ToList();
+            List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
             user = userList.Find(x => x.UserId == userId);
             if (user == null)
             {
@@ -62,6 +63,16 @@ namespace azuretest.Controllers
 
             try
             {
+
+                if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 8) == null)
+                {
+                    UserMilestone newMilestone = new UserMilestone();
+                    newMilestone.UserId = user.UserId;
+                    newMilestone.MilestoneId = 8;
+                    dbContext.UserMilestones.Add(newMilestone);
+                    dbContext.SaveChanges();
+                }
+
                 dbContext.MealsHistories.Add(value);
                 dbContext.SaveChanges();
                 return JsonConvert.SerializeObject("Successfully added to your meals");
