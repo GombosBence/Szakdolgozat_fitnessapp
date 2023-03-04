@@ -26,7 +26,7 @@ namespace Szakdolgozat.Model
             var pendingIntent = PendingIntent.GetActivity(context, 0, intent, PendingIntentFlags.UpdateCurrent);
             var notificationBuilder = new NotificationCompat.Builder(context, foregroundChannelId)
                           .SetContentTitle("Stepcount tracker")
-                          .SetContentText("Your steps are being tracked")
+                          .SetContentText("Step counter is active")
                           .SetSmallIcon(Resource.Drawable.abc_btn_default_mtrl_shape)
                           .SetOngoing(true)
                           .SetContentIntent(pendingIntent);

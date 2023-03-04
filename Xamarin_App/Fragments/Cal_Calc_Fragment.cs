@@ -29,8 +29,6 @@ namespace Szakdolgozat
         Interface1 api;
         int userid;
         ConnectionString connectionString = new ConnectionString();
-        SeekBar weightSeekBar;
-        TextView weightTextview;
 
       [Obsolete]
 #pragma warning disable CS0809 // Obsolete member overrides non-obsolete member

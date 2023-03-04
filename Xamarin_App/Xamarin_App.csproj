@@ -68,6 +68,7 @@
     <Compile Include="Fragments\MainMealFragment.cs" />
     <Compile Include="Fragments\mealTrackerFragment.cs" />
     <Compile Include="Fragments\Fragment2.cs" />
+    <Compile Include="Fragments\milestoneFragment.cs" />
     <Compile Include="Fragments\StepCounterFragment.cs" />
     <Compile Include="Login_Page.cs" />
     <Compile Include="Main_Page.cs" />
@@ -271,6 +272,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\dumbbell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\milestones.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\pnghut_trophy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

@@ -29,7 +29,11 @@ public partial class UserInformation
 
     public int? StepGoal { get; set; }
 
+    public int? CalorieGoal { get; set; }
+
     public virtual ICollection<MealsHistory> MealsHistories { get; } = new List<MealsHistory>();
 
     public virtual ICollection<StepsHistory> StepsHistories { get; } = new List<StepsHistory>();
+
+    public virtual ICollection<UserMilestone> UserMilestones { get; } = new List<UserMilestone>();
 }

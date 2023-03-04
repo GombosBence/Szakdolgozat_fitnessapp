@@ -65,6 +65,9 @@ namespace azuretest.Controllers
                 }
 
                 int harrisBenedict = (int)Math.Round(brm);
+                user.CalorieGoal = harrisBenedict;
+                dbContext.Update(user);
+                dbContext.SaveChanges();
                 return JsonConvert.SerializeObject(harrisBenedict, Formatting.Indented);
             }
         }

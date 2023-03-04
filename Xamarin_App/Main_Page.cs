@@ -78,7 +78,7 @@ namespace Szakdolgozat
             SupportToolBar toolBar = FindViewById<SupportToolBar>(Resource.Id.toolbar);
             SetSupportActionBar(toolBar);
             SupportActionBar ab = SupportActionBar;
-            ab.SetHomeAsUpIndicator(Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha);
+            ab.SetHomeAsUpIndicator(Resource.Drawable.menu);
             ab.SetDisplayHomeAsUpEnabled(true);
 
            mDrawerLayout = mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawerLayout);

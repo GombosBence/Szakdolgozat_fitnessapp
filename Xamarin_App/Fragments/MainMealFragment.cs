@@ -81,7 +81,7 @@ namespace Szakdolgozat.Fragments
 
             adapter = new TabAdapter(ChildFragmentManager);
             adapter.AddFragment(fragment2, "My Meals");
-            adapter.AddFragment(fragment1, "Meal Tracker");
+            adapter.AddFragment(fragment1, "Search Meals");
             adapter.AddFragment(calFragment, "Calorie Calculator");
 
             viewPager.Adapter = adapter;

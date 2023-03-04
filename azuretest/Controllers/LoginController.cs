@@ -1,6 +1,7 @@
 ﻿using azuretest.Models;
 using azuretest.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -18,12 +19,15 @@ namespace azuretest.Controllers
     public class LoginController : ControllerBase
     {
         AspWebApiDbContext dbContext = new AspWebApiDbContext();
+        
 
         // POST api/<LoginController>
         [HttpPost]
         [Obsolete]
         public string Post([FromBody] UserInformation userinfo)
         {
+            List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
+
             if (dbContext.UserInformations.Any(user => user.Username.Equals(userinfo.Username)))
             {
                 UserInformation user = dbContext.UserInformations.Where(u => u.Username.Equals(userinfo.Username)).First();
@@ -32,7 +36,16 @@ namespace azuretest.Controllers
 
                 if (client_post_password.Equals(user.Password))
                 {
-                    
+
+                    if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 10) == null)
+                    {
+                        UserMilestone newMilestone = new UserMilestone();
+                        newMilestone.UserId = user.UserId;
+                        newMilestone.MilestoneId = 10;
+                        dbContext.UserMilestones.Add(newMilestone);
+                        dbContext.SaveChanges();
+                    }
+
                     return JsonConvert.SerializeObject(user.UserId);
                 }
                 else

@@ -130,10 +130,12 @@
                 android:textSize="20sp"
                 android:gravity="center"
             android:backgroundTint="#B7D2CE"
+            android:textColor="#ffffff"
                 android:background="@drawable/customborder"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"/>
         <Button
+            android:textColor="#ffffff"
                 android:layout_weight="1"
                 android:text="Register"
                 android:layout_width="match_parent"

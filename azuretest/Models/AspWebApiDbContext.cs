@@ -17,9 +17,13 @@ public partial class AspWebApiDbContext : DbContext
 
     public virtual DbSet<MealsHistory> MealsHistories { get; set; }
 
+    public virtual DbSet<Milestone> Milestones { get; set; }
+
     public virtual DbSet<StepsHistory> StepsHistories { get; set; }
 
     public virtual DbSet<UserInformation> UserInformations { get; set; }
+
+    public virtual DbSet<UserMilestone> UserMilestones { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -50,6 +54,16 @@ public partial class AspWebApiDbContext : DbContext
                 .HasConstraintName("FK__Meals_His__Quant__628FA481");
         });
 
+        modelBuilder.Entity<Milestone>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Mileston__3214EC07D190DFCD");
+
+            entity.Property(e => e.MilestoneName)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("Milestone_Name");
+        });
+
         modelBuilder.Entity<StepsHistory>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Steps_Hi__3213E83FA408B5E2");
@@ -76,6 +90,7 @@ public partial class AspWebApiDbContext : DbContext
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
                 .HasColumnName("userId");
+            entity.Property(e => e.CalorieGoal).HasColumnName("Calorie_Goal");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -92,6 +107,24 @@ public partial class AspWebApiDbContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<UserMilestone>(entity =>
+        {
+            entity.ToTable("User_Milestones");
+
+            entity.Property(e => e.MilestoneId).HasColumnName("Milestone_Id");
+            entity.Property(e => e.UserId).HasColumnName("User_Id");
+
+            entity.HasOne(d => d.Milestone).WithMany(p => p.UserMilestones)
+                .HasForeignKey(d => d.MilestoneId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__User_Mile__Score__70DDC3D8");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserMilestones)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__User_Mile__User___71D1E811");
         });
 
         OnModelCreatingPartial(modelBuilder);
