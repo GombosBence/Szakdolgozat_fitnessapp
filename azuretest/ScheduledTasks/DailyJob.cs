@@ -15,49 +15,15 @@ namespace azuretest.ScheduledTasks
             List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
             List<StepsHistory> userSteps = dbContext.StepsHistories.ToList();
 
+            UserMilestone Milestone = new UserMilestone();
+            Milestone.UserId = 5;
+            Milestone.MilestoneId = 5;
+            dbContext.Add(Milestone);
+            dbContext.SaveChanges();
+            
+
             foreach (UserInformation user in users)
             {
-
-
-                //Check step milestones
-
-                foreach (StepsHistory steps in userSteps)
-                {
-                    if (steps.Steps > 5000)
-                    {
-                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 1) == null)
-                        {
-                            UserMilestone newMilestone = new UserMilestone();
-                            newMilestone.UserId = user.UserId;
-                            newMilestone.MilestoneId = 1;
-                            dbContext.UserMilestones.Add(newMilestone);
-                            dbContext.SaveChanges();
-                        }
-                    }
-                    if (steps.Steps > 10000)
-                    {
-                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 2) == null)
-                        {
-                            UserMilestone newMilestone = new UserMilestone();
-                            newMilestone.UserId = user.UserId;
-                            newMilestone.MilestoneId = 2;
-                            dbContext.UserMilestones.Add(newMilestone);
-                            dbContext.SaveChanges();
-                        }
-                    }
-                    if (steps.Steps > 20000)
-                    {
-                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 3) == null)
-                        {
-                            UserMilestone newMilestone = new UserMilestone();
-                            newMilestone.UserId = user.UserId;
-                            newMilestone.MilestoneId = 3;
-                            dbContext.UserMilestones.Add(newMilestone);
-                            dbContext.SaveChanges();
-                        }
-                    }
-                }
-
 
                 //Check 1 day streak
 

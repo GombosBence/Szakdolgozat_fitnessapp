@@ -24,6 +24,7 @@ namespace azuretest.Controllers
         {
 
             List<StepsHistory> stepsList = dbContext.StepsHistories.ToList();
+            List<UserMilestone> userMilestones = dbContext.UserMilestones.ToList();
             UserInformation user = dbContext.UserInformations.Where(x => x.UserId == userId).First();
             if (user == null)
             {
@@ -40,6 +41,41 @@ namespace azuretest.Controllers
                     userStepHistory.Distance = steps / 1200.0;
                     dbContext.Update(userStepHistory);
                     dbContext.SaveChanges();
+                    if (steps >= 5000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 1) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 1;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                    if (steps >= 10000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 2) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 2;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+                    if (steps >= 20000)
+                    {
+                        if (userMilestones.FirstOrDefault(x => x.UserId == user.UserId && x.MilestoneId == 3) == null)
+                        {
+                            UserMilestone newMilestone = new UserMilestone();
+                            newMilestone.UserId = user.UserId;
+                            newMilestone.MilestoneId = 3;
+                            dbContext.UserMilestones.Add(newMilestone);
+                            dbContext.SaveChanges();
+                        }
+                    }
+
+
                     return (int)userStepHistory.Steps;
                 }
 

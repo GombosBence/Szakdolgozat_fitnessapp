@@ -24,14 +24,16 @@ namespace azuretest.ScheduledTasks
                             .WithIdentity("dailyTrigger", "group1")
                             .WithDailyTimeIntervalSchedule(x => x
                             .OnEveryDay()
-                            .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
+                            .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay( 8 , 0 ))
                             .WithIntervalInHours(24))
                             .Build();
 
 
             await scheduler.ScheduleJob(job, trigger);
             await scheduler.Start();
-            await Task.Delay(TimeSpan.FromSeconds(60));
+
+            await Task.Delay(Timeout.Infinite);
+            await scheduler.Shutdown();
         }
 
 

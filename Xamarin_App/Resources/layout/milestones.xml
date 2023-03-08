@@ -14,9 +14,19 @@
 
     <ImageView
         android:layout_gravity="center"
-        android:layout_width="75px"
-        android:layout_height="75px"
+        android:layout_width="150px"
+        android:layout_height="150px"
         android:src="@drawable/pnghut_trophy"/>
+
+
+    <TextView
+        android:id="@+id/scoreTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
 
     
 
