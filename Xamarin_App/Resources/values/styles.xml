@@ -16,6 +16,10 @@
 		<item name="android:scaleY">10</item>
 	</style>
 
+	<style name="CustomHorizontalProgressBar3" parent="@style/Base.Widget.AppCompat.ProgressBar.Horizontal">
+		<item name="android:scaleY">4</item>
+	</style>
+
 	<style name="CustomSeekbar" parent="@style/Base.Widget.AppCompat.ProgressBar.Horizontal">
 		<item name="android:scaleY">2</item>
 		<item name="android:scaleX">2</item>

@@ -36,6 +36,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/myMilestoneBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -43,6 +44,7 @@
             android:backgroundTint="#B7D2CE"
             android:background="@drawable/customborder"/>
         <Button
+            android:id="@+id/inProgressBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -35,6 +35,7 @@ namespace Szakdolgozat
         FrameLayout fragmentContainer;
         NavigationView navigagtonView;
         MainMealFragment _mainMealFragment;
+        milestoneFragment _milestoneFragment;
         StepCounterFragment _stepCounterFragment;
         SupportFragment mCurrentFragment;
         Stack<SupportFragment> mStackFragment;
@@ -64,11 +65,17 @@ namespace Szakdolgozat
             bundle.PutInt("uid", loggedInUserId);
             _mainMealFragment = new MainMealFragment();
             _stepCounterFragment = new StepCounterFragment();
+            _milestoneFragment = new milestoneFragment();
             _mainMealFragment.Arguments = bundle;
             _stepCounterFragment.Arguments = bundle;
+            _milestoneFragment.Arguments = bundle;
+
+
 
             mCurrentFragment = _mainMealFragment;
             var trans = SupportFragmentManager.BeginTransaction();
+            trans.Add(fragmentContainer.Id, _milestoneFragment, "Milestones");
+            trans.Hide(_milestoneFragment);
             trans.Add(fragmentContainer.Id, _stepCounterFragment, "Stepcounter");
             trans.Hide(_stepCounterFragment);
             trans.Add(fragmentContainer.Id, _mainMealFragment, "MainMealFragment");
@@ -171,6 +178,7 @@ namespace Szakdolgozat
                         ShowFragment(_stepCounterFragment);
                         break;
                     case "Milestones":
+                        ShowFragment(_milestoneFragment);
                         break;
                     case "Profile settings":
                         break;

@@ -18,13 +18,6 @@
         android:layout_width="match_parent"
         android:textSize="25sp"/>
         
-    <item android:id="@+id/dashboardMenuItem1"  
-        android:title="Dashboard"
-        android:icon="@drawable/Dashboard_Icon"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textSize="25sp"/> 
-        
    
     <item android:id="@+id/stepMenuItem2"  
          android:title="Step Counter"
@@ -41,12 +34,6 @@
         android:layout_width="match_parent"
         android:textSize="25sp"/>
 
-    <item android:id="@+id/workoutPlannerMenuItem3"  
-        android:title="Workout Planner"
-        android:icon="@drawable/dumbbell"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textSize="25sp"/>
 
     <item android:id="@+id/profileMenuItem1"  
         android:title="Profile settings"

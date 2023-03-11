@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p4="http://xamarin.com/mono/android/designer"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/customborder">
+
+
+    <TextView
+    android:background="@drawable/textviewborder"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Milestone name"
+        android:textSize="18dp"
+        android:id="@+id/milestoneNameTv"
+        android:layout_gravity="center"/>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ProgressBar
+      android:progress="1000"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="10dp"
+      android:layout_gravity="center_horizontal"
+      android:progressTint="#b7dadd"
+      style="@style/CustomHorizontalProgressBar3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minWidth="25px"
+      android:minHeight="50px"
+      android:id="@+id/calProgressBar"
+      android:min="0"
+      android:max="2000"/>
+
+
+        <TextView
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/currentProgressTv"
+            android:layout_width="@dimen/abc_action_bar_default_height_material"
+            android:layout_height="25dp"
+            android:textSize="16sp"
+            android:text="0"
+            android:gravity="center"/>
+        <TextView
+            android:layout_marginTop="18dp"
+            android:id="@+id/slsh"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/abc_action_bar_default_height_material"
+            android:layout_height="25dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="/"/>
+        <TextView
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="85dp"
+            android:layout_toRightOf="@id/slsh"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/goalProgressTv"
+            android:layout_width="@dimen/abc_action_bar_default_height_material"
+            android:layout_height="25dp"
+            android:textSize="16sp"
+            android:text="5000"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/scoreTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"/>
+    
+</LinearLayout>

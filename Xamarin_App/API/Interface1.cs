@@ -56,6 +56,9 @@ namespace Szakdolgozat.API
         [Post("/api/GetStepGoal")]
         Task<int> getStepGoal(int userid);
 
+        [Post("/api/UserMilestone")]
+        Task<string> getUserMilestones([Body] int userId);
+
         
     }
 }

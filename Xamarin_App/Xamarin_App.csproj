@@ -76,6 +76,7 @@
     <Compile Include="Model\FoodModel.cs" />
     <Compile Include="Model\MealsHistory.cs" />
     <Compile Include="Model\Messages.cs" />
+    <Compile Include="Model\Milestone.cs" />
     <Compile Include="Model\MyMealsModel.cs" />
     <Compile Include="Model\NotificationHelper.cs" />
     <Compile Include="Model\StepCounterService.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Reg_Page.cs" />
     <Compile Include="Resources\adapter\foodSearchListAdapter.cs" />
     <Compile Include="Resources\adapter\myMealsListAdapter.cs" />
+    <Compile Include="Resources\adapter\userMilestoneAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -281,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\pnghut_trophy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\milestoneListTemplate.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
