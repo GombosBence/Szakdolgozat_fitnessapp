@@ -63,7 +63,7 @@ namespace Szakdolgozat.Fragments
             api = RestService.For<Interface1>(connectionString.getConnection());
             loggedInUserId = Arguments.GetInt("uid");
             getLastSevenDaysSteps();
-           
+            getStepGoal();
 
 
 
@@ -94,8 +94,8 @@ namespace Szakdolgozat.Fragments
 
         public async void getStepGoal()
         {
-            var result = api.getStepGoal(loggedInUserId);
-            switch (result.Result)
+            var result = await api.getStepGoal(loggedInUserId);
+            switch (result)
             {
                 case 1000:
                     stepGoalSpinner.SetSelection(0);
@@ -155,12 +155,12 @@ namespace Szakdolgozat.Fragments
         private async void spinner_Itemselceted(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             var spinner = sender as Spinner;
-            getStepGoal();
-            stepProgressBar.Max = Int32.Parse(spinner.SelectedItem.ToString());
             
-
+            stepProgressBar.Max = Int32.Parse(spinner.SelectedItem.ToString());
 
             var result = await api.setGoal(loggedInUserId, Int32.Parse(spinner.SelectedItem.ToString()), DateTime.Now);
+
+            getStepGoal();
         }
      
     }
