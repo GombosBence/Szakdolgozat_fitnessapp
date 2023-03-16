@@ -97,6 +97,9 @@ public partial class AspWebApiDbContext : DbContext
             entity.Property(e => e.Gender)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.MaximumCalStreak).HasColumnName("Maximum_Cal_streak");
+            entity.Property(e => e.MaximumSteps).HasColumnName("Maximum_Steps");
+            entity.Property(e => e.MilestoneScore).HasColumnName("Milestone_Score");
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .IsUnicode(false);

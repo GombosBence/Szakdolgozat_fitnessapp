@@ -31,6 +31,12 @@ public partial class UserInformation
 
     public int? CalorieGoal { get; set; }
 
+    public int? MilestoneScore { get; set; }
+
+    public int? MaximumSteps { get; set; }
+
+    public int? MaximumCalStreak { get; set; }
+
     public virtual ICollection<MealsHistory> MealsHistories { get; } = new List<MealsHistory>();
 
     public virtual ICollection<StepsHistory> StepsHistories { get; } = new List<StepsHistory>();

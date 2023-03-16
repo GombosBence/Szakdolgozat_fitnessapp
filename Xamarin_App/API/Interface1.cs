@@ -57,7 +57,10 @@ namespace Szakdolgozat.API
         Task<int> getStepGoal(int userid);
 
         [Post("/api/UserMilestone")]
-        Task<string> getUserMilestones([Body] int userId);
+        Task<string> getUserMilestones([Body] int userId, int qVersion);
+
+        [Post("/api/MilestoneScore")]
+        Task<string> getUserMilestoneScore([Body] int userId);
 
         
     }

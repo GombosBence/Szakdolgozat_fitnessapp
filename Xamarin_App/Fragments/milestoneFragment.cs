@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Szakdolgozat.API;
 using Szakdolgozat.Model;
 using Szakdolgozat.Resources.adapter;
@@ -26,6 +27,7 @@ namespace Szakdolgozat.Fragments
         Button myMilestones;
         Button inProgress;
         Interface1 api;
+        TextView scoreTv;
         int userid;
         RecyclerView achivementList;
         userMilestoneAdapter adapter;
@@ -39,11 +41,15 @@ namespace Szakdolgozat.Fragments
             api = RestService.For<Interface1>(connectionString.getConnection());
             userid = Arguments.GetInt("uid");
             myMilestones = (Button)view.FindViewById(Resource.Id.myMilestoneBtn);
+            inProgress = (Button)view.FindViewById(Resource.Id.inProgressBtn);
             achivementList = (RecyclerView)view.FindViewById(Resource.Id.achievement_list);
+            scoreTv = (TextView)view.FindViewById(Resource.Id.scoreTv);
 
             layoutManager = new LinearLayoutManager(Activity);
             achivementList.SetLayoutManager(layoutManager);
+            getScore();
             myMilestones.Click += MyMilestones_Click;
+            inProgress.Click += InProgress_ClickAsync;
 
 
 
@@ -51,14 +57,28 @@ namespace Szakdolgozat.Fragments
             return view;
         }
 
+
+        public async void getScore()
+        {
+            var result = await api.getUserMilestoneScore(userid);
+            scoreTv.Text = JsonConvert.DeserializeObject<string>(result);
+
+        }
+
+        private async void InProgress_ClickAsync(object sender, EventArgs e)
+        {
+            var result = await api.getUserMilestones(userid, 1);
+            userMilestoneList = JsonConvert.DeserializeObject<List<Milestone>>(result);
+
+
+
+            achivementList.SetAdapter(new userMilestoneAdapter(Activity, userMilestoneList, userid));
+        }
+
         private async void MyMilestones_Click(object sender, EventArgs e)
         {
-            var result = await api.getUserMilestones(userid);
+            var result = await api.getUserMilestones(userid, 0);
             userMilestoneList = JsonConvert.DeserializeObject<List<Milestone>>(result);
-            
-                Toast.MakeText(Activity, userMilestoneList[0].MilestoneName, ToastLength.Short).Show();
-            
-           
                 
             
             

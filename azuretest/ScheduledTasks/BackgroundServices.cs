@@ -61,6 +61,20 @@ namespace azuretest.ScheduledTasks
                     // If there are no meals for the current date, reset the streak and move on to the next date
                     if (mealsForDate.Count == 0)
                     {
+                    if (user.MaximumCalStreak != null && user.MaximumCalStreak < streak)
+                    {
+                        user.MaximumCalStreak = streak;
+                        dbContext.UserInformations.Update(user);
+                        dbContext.SaveChanges();
+
+                    }
+                    if (user.MaximumCalStreak == null)
+                    {
+                        user.MaximumCalStreak = 0;
+                        dbContext.UserInformations.Update(user);
+                        dbContext.SaveChanges();
+                    }
+
                         streak = 0;
                         continue;
                     }
@@ -74,8 +88,21 @@ namespace azuretest.ScheduledTasks
                         streak++;
                     }
                     else
+                {
+                    if (user.MaximumCalStreak != null && user.MaximumCalStreak < streak)
                     {
-                        streak = 0;
+                        user.MaximumCalStreak = streak;
+                        dbContext.UserInformations.Update(user);
+                        dbContext.SaveChanges();
+
+                    }
+                    if (user.MaximumCalStreak == null)
+                    {
+                        user.MaximumCalStreak = 0;
+                        dbContext.UserInformations.Update(user);
+                        dbContext.SaveChanges();
+                    }
+                    streak = 0;
                     }
 
                     // If we've reached the desired streak length, return true
@@ -108,6 +135,15 @@ namespace azuretest.ScheduledTasks
                     {
                         break;
                     }
+
+                    //Check maximum steps
+
+                    List<StepsHistory> specSteps = userSteps.Where(x => x.UserId == user.UserId).ToList();
+                    var maximum = specSteps.OrderByDescending(o => o.Steps).First();
+                    user.MaximumSteps = maximum.Steps;
+                    dbContext.UserInformations.Update(user);
+                    dbContext.SaveChanges();
+
 
                     //Check 1 day streak
 
@@ -164,6 +200,21 @@ namespace azuretest.ScheduledTasks
                             dbContext.SaveChanges();
                         }
                     }
+
+                    //ADD points
+                    List<Milestone> milestones = dbContext.Milestones.ToList();
+                    int sum = 0;
+                    foreach (var milestone in userMilestones)
+                    {
+
+                        sum += milestones.First(x => x.Id == milestone.MilestoneId).Score;
+
+                    }
+                    user.MilestoneScore = sum;
+                    dbContext.UserInformations.Update(user);
+                    dbContext.SaveChanges();
+                    sum = 0;
+                    
                 }
                     await Task.Delay(60000, stoppingToken);
             }

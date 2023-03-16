@@ -6,6 +6,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using DotLiquid.Util;
+using Java.Lang;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,12 @@ namespace Szakdolgozat.Resources.adapter
 
             public TextView milestoneScore { get; set; }
 
+            public TextView currentProgress { get; set; }
+
+            public TextView goalProgress { get; set; }
+
+            public ProgressBar ProgressBar { get; set; }
+
 
             public MyView(View mMainView) : base(mMainView)
             {
@@ -63,6 +70,10 @@ namespace Szakdolgozat.Resources.adapter
 
             myHolder.mileStoneName.Text = milestones[position].MilestoneName;
             myHolder.milestoneScore.Text = (milestones[position].Score).ToString();
+            myHolder.currentProgress.Text = (milestones[position].progress).ToString();
+            myHolder.goalProgress.Text = (milestones[position].Goal).ToString();
+            myHolder.ProgressBar.Max = milestones[position].progress;
+            myHolder.ProgressBar.Progress = milestones[position].progress;
 
         }
 
@@ -71,11 +82,18 @@ namespace Szakdolgozat.Resources.adapter
             View row = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.milestoneListTemplate, parent, false);
             TextView mName = (TextView)row.FindViewById(Resource.Id.milestoneNameTv);
             TextView mScore = (TextView)row.FindViewById(Resource.Id.scoreTv);
+            TextView goalProg = (TextView)row.FindViewById(Resource.Id.goalProgressTv);
+            TextView currentProg = (TextView)row.FindViewById(Resource.Id.currentProgressTv);
+            ProgressBar progBar = (ProgressBar)row.FindViewById(Resource.Id.milestoneProgressBar);
+
 
             MyView view = new MyView(row)
             {
                 mileStoneName = mName,
-                milestoneScore = mScore
+                milestoneScore = mScore,
+                goalProgress = goalProg,
+                currentProgress = currentProg,
+                ProgressBar = progBar
 
 
             };
