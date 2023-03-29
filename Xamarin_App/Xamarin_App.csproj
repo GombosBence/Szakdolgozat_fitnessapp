@@ -67,7 +67,7 @@
     <Compile Include="Fragments\Cal_Calc_Fragment.cs" />
     <Compile Include="Fragments\MainMealFragment.cs" />
     <Compile Include="Fragments\mealTrackerFragment.cs" />
-    <Compile Include="Fragments\Fragment2.cs" />
+    <Compile Include="Fragments\mealListFragment.cs" />
     <Compile Include="Fragments\milestoneFragment.cs" />
     <Compile Include="Fragments\StepCounterFragment.cs" />
     <Compile Include="Login_Page.cs" />

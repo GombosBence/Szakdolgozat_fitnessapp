@@ -31,7 +31,7 @@ namespace Szakdolgozat.Fragments
     public class MainMealFragment : Android.Support.V4.App.Fragment, ViewPager.IOnPageChangeListener
     {
         mealTrackerFragment fragment1;
-        Fragment2 fragment2;
+        mealListFragment fragment2;
         Cal_Calc_Fragment calFragment;
         int loggedInUserId;
         Interface1 api;
@@ -51,7 +51,7 @@ namespace Szakdolgozat.Fragments
             bundle.PutInt("uid", loggedInUserId);
             fragment1 = new mealTrackerFragment();
             fragment1.Arguments = bundle;
-            fragment2 = new Fragment2();
+            fragment2 = new mealListFragment();
             fragment2.Arguments = bundle;
             calFragment = new Cal_Calc_Fragment();
             calFragment.Arguments = bundle;

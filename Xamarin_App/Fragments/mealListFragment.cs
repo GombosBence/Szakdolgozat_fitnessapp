@@ -19,7 +19,7 @@ using Szakdolgozat.Resources.adapter;
 namespace Szakdolgozat.Fragments
 {
     [Obsolete]
-    public class Fragment2 : Android.Support.V4.App.Fragment, refreshInterface
+    public class mealListFragment : Android.Support.V4.App.Fragment, refreshInterface
     {
 
         TextView currentCalTv;

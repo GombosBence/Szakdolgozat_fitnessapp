@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Szakdolgozat
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class Reg_Page : AppCompatActivity
     {
         EditText usernameEt;
@@ -56,6 +56,11 @@ namespace Szakdolgozat
 
                 var result = await api.RegisterUser(userinfo);
                 Toast.MakeText(this, result, ToastLength.Short).Show();
+                usernameEt.Text = "";
+                passwordEt.Text = "";
+                emailEt.Text = "";
+                passwordAgainEt.Text = "";
+                BackBtn_Click(null, null);
             };
 
             backBtn.Click += BackBtn_Click;        

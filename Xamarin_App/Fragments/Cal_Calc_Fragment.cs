@@ -95,6 +95,13 @@ namespace Szakdolgozat
 
             var result = await api.PutUserData(userid, age, weight, height, gender, goal, activityLevel);
             Toast.MakeText(Activity, result, ToastLength.Short).Show();
+            ageEt.Text = "";
+            weightEt.Text = "";
+            heightEt.Text = "";
+            ageEt.ClearFocus();
+            weightEt.ClearFocus();
+            heightEt.ClearFocus();
+            
 
         }
 

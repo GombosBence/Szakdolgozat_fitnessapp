@@ -14,14 +14,16 @@ namespace azuretest.Controllers
         [HttpPost]
         public int getStepGoal(int userId)
         {
-            List<UserInformation> stepHistoryList = dbContext.UserInformations.ToList();
+           
             if (dbContext.UserInformations.Where(x => x.UserId == userId).Any())
             {
                 UserInformation user = dbContext.UserInformations.Where(x => x.UserId == userId).First();
+
+                if(user.StepGoal != null)
                 return (int)user.StepGoal;
             }
 
-            return -1;
+            return 5000;
         }
     }
 }
