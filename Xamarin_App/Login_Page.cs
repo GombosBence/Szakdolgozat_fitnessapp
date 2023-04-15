@@ -94,6 +94,7 @@ namespace Szakdolgozat
             if (result.Equals(badPw) || result.Equals(badUs))
             {
                 Toast.MakeText(this, result, ToastLength.Short).Show();
+                mDialog.Hide();
             }
             else
             {
